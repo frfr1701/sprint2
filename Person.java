@@ -4,24 +4,29 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public abstract class Person implements CheckKund{
+public abstract class Person implements CheckKund {
+
     protected String pnr;
     protected String namn;
+
     public Person(String pnr, String namn) {
         this.pnr = pnr;
         this.namn = namn;
     }
-    public Person(){
+
+    public Person() {
     }
+
     @Override
-    public String getNamn(){
+    public String getNamn() {
         return namn;
     }
+
     @Override
-    public String getPnr(){
+    public String getPnr() {
         return pnr;
     }
-    
+
     @Override
     public void showMessage(JOptionPane pane) throws InterruptedException {
         JDialog all = pane.createDialog(null, "Gym");

@@ -9,10 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import javax.swing.JDialog;
 
 public class Sprint2 {
 
@@ -42,8 +39,8 @@ public class Sprint2 {
                     if (ListCustomer.getIfKund().equalsIgnoreCase("Personen är kund!")) {
                         try (PrintWriter pw = new PrintWriter(new FileWriter(loggString, true));
                                 BufferedReader br = Files.newBufferedReader(logg)) {
-                            String compare="";
-                            int nodatefound=1;
+                            String compare = "";
+                            int nodatefound = 1;
                             while ((compare = br.readLine()) != null) {
                                 LocalDate dagensDatum = LocalDate.now();
                                 compare = compare.trim();
@@ -60,9 +57,9 @@ public class Sprint2 {
                                         }
                                     }
                                 }
-                                    
-                                }
-                            if(nodatefound==1){
+
+                            }
+                            if (nodatefound == 1) {
                                 pw.println(dayString);
                             }
                             pw.println(ListCustomer.getPnr() + ", " + ListCustomer.getNamn());
