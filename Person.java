@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 public abstract class Person implements CheckKund{
     protected String pnr;
     protected String namn;
-    protected String IfKund;
-    public Person(String pnr, String namn, String IfKund) {
-        this.namn = namn;
+    public Person(String pnr, String namn) {
         this.pnr = pnr;
-        this.IfKund=IfKund;
+        this.namn = namn;
+    }
+    public Person(){
     }
     @Override
     public String getNamn(){
@@ -20,10 +20,6 @@ public abstract class Person implements CheckKund{
     @Override
     public String getPnr(){
         return pnr;
-    }
-    @Override
-    public String getIfKund(){
-        return IfKund;
     }
     
     @Override

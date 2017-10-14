@@ -29,7 +29,7 @@ public class Sprint2 {
     void program() throws IOException, InterruptedException {
         boolean exit = true;
         while (exit) {
-            boolean notfound = true;
+            boolean noCustomer = true;
             String check = JOptionPane.showInputDialog("Skriv in ett personnummer eller namn");
             if (check == null || check.equals("")) {
                 exit = false;
@@ -37,7 +37,7 @@ public class Sprint2 {
             }
             for (Person ListCustomer : ListCustomers) {
                 if (check.equalsIgnoreCase(ListCustomer.getNamn()) || check.equalsIgnoreCase(ListCustomer.getPnr())) {
-                    notfound = false;
+                    noCustomer = false;
                     ListCustomer.Message();
                     if (ListCustomer.getIfKund().equalsIgnoreCase("Personen är kund!")) {
                         try (PrintWriter pw = new PrintWriter(new FileWriter(loggString, true));
@@ -72,13 +72,9 @@ public class Sprint2 {
                     }
                 }
             }
-            if (notfound) {
-                JOptionPane pane = new JOptionPane("Personen är inte kund!", JOptionPane.INFORMATION_MESSAGE);
-                JDialog all = pane.createDialog(null, "Gym");
-                all.setModal(false);
-                all.setVisible(true);
-                TimeUnit.SECONDS.sleep(2);
-                all.setVisible(false);
+            if (noCustomer) {
+                Person neverCustomer = new InteKund();
+                neverCustomer.Message();
             }
         }
     }
