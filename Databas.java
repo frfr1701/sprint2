@@ -14,7 +14,7 @@ public class Databas {
 
     private final Path customers = Paths.get("src\\sprint2\\customers.txt");
 
-    public List<Person> getAllPersons() throws IOException {
+    List<Person> getAllPersons() throws IOException {
         List<Person> ListCustomers = new ArrayList<>();
         LocalDate kravDatum = LocalDate.now().minusYears(1);
         String firstLine;

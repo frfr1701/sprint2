@@ -12,18 +12,30 @@ public class PersonTest {
 
     @Test
     public final void getIfKundTest() {
-        TestCase.assertTrue(test.getIfKund().equalsIgnoreCase("Personen är kund!"));
-        TestCase.assertTrue(test2.getIfKund().equalsIgnoreCase("Personen har varit kund!"));
-        TestCase.assertTrue(test3.getIfKund().equalsIgnoreCase("Personen är inte kund!"));
+        TestCase.assertTrue(test.getIfKund() == 2);
+        TestCase.assertFalse(test.getIfKund() == 1);
+        TestCase.assertFalse(test.getIfKund() == 0);
+
+        TestCase.assertTrue(test2.getIfKund() == 1);
+        TestCase.assertFalse(test2.getIfKund() == 2);
+        TestCase.assertFalse(test2.getIfKund() == 0);
+
+        TestCase.assertTrue(test3.getIfKund() == 0);
+        TestCase.assertFalse(test3.getIfKund() == 2);
+        TestCase.assertFalse(test3.getIfKund() == 1);
     }
 
-    public final void getNamnTest() {
-        TestCase.assertTrue(test.getNamn().equalsIgnoreCase("Fredrik Frölund"));
-        TestCase.assertTrue(test2.getNamn().equalsIgnoreCase("Fredrik Frölund"));
-    }
+    public final void CompareTest() {
+        TestCase.assertTrue(test.compare("Fredrik Frölund"));
+        TestCase.assertTrue(test.compare("9702201030"));
+        TestCase.assertFalse(test.compare("asdasd"));
 
-    public final void getPnrTest() {
-        TestCase.assertTrue(test.getPnr().equalsIgnoreCase("9702201030"));
-        TestCase.assertTrue(test2.getPnr().equalsIgnoreCase("9702201030"));
+        TestCase.assertTrue(test2.compare("Fredrik Frölund"));
+        TestCase.assertTrue(test2.compare("9702201030"));
+        TestCase.assertFalse(test2.compare("asdasd"));
+
+        TestCase.assertFalse(test3.compare("Fredrik Frölund"));
+        TestCase.assertFalse(test3.compare("9702201030"));
+
     }
 }

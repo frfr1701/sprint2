@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 
 public abstract class Person implements CheckKund {
 
-    protected String pnr;
-    protected String namn;
+    private String pnr;
+    private String namn;
 
     public Person(String pnr, String namn) {
         this.pnr = pnr;
@@ -17,14 +17,17 @@ public abstract class Person implements CheckKund {
     public Person() {
     }
 
-    @Override
-    public String getNamn() {
+    String getNamn() {
         return namn;
     }
 
-    @Override
-    public String getPnr() {
+    String getPnr() {
         return pnr;
+    }
+
+    @Override
+    public boolean compare(String CheckPerson) {
+        return CheckPerson.equalsIgnoreCase(pnr) || CheckPerson.equalsIgnoreCase(namn);
     }
 
     @Override

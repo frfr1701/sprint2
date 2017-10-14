@@ -4,11 +4,9 @@ import javax.swing.JOptionPane;
 
 public interface CheckKund {
 
-    public String getNamn();
+    public boolean compare(String CheckPerson);
 
-    public String getPnr();
-
-    public String getIfKund();
+    public int getIfKund();
 
     public void Message() throws InterruptedException;
 

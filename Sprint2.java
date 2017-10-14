@@ -13,33 +13,26 @@ import java.util.List;
 
 public class Sprint2 {
 
-    List<Person> ListCustomers;
     String loggString = "src\\sprint2\\logg.txt";
     Path logg = Paths.get("src\\sprint2\\logg.txt");
-    String dayString = "///" + LocalDate.now().toString() + "///";
-
-    void databasen() throws IOException {
-        Databas databas = new Databas();
-        ListCustomers = databas.getAllPersons();
-    }
 
     void program() throws IOException, InterruptedException {
-        boolean exit = true;
-        while (exit) {
+        while (true) {
             boolean noCustomer = true;
             String check = JOptionPane.showInputDialog("Skriv in ett personnummer eller namn");
             if (check == null || check.equals("")) {
-                exit = false;
                 break;
             }
+            Databas databas = new Databas();
+            List<Person> ListCustomers = databas.getAllPersons();
             for (Person ListCustomer : ListCustomers) {
-                if (check.equalsIgnoreCase(ListCustomer.getNamn()) || check.equalsIgnoreCase(ListCustomer.getPnr())) {
+                if (ListCustomer.compare(check)) {
                     noCustomer = false;
                     ListCustomer.Message();
-                    if (ListCustomer.getIfKund().equalsIgnoreCase("Personen är kund!")) {
+                    if (ListCustomer.getIfKund() == 2) {
                         try (PrintWriter pw = new PrintWriter(new FileWriter(loggString, true));
                                 BufferedReader br = Files.newBufferedReader(logg)) {
-                            String compare = "";
+                            String compare;
                             int nodatefound = 1;
                             while ((compare = br.readLine()) != null) {
                                 LocalDate dagensDatum = LocalDate.now();
@@ -60,7 +53,7 @@ public class Sprint2 {
 
                             }
                             if (nodatefound == 1) {
-                                pw.println(dayString);
+                                pw.println("///" + LocalDate.now().toString() + "///");
                             }
                             pw.println(ListCustomer.getPnr() + ", " + ListCustomer.getNamn());
                         } catch (Exception e) {
@@ -76,7 +69,7 @@ public class Sprint2 {
         }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, NullPointerException {
         Sprint2 start = new Sprint2();
         boolean exitProgram = true;
         String[] Alternativ = {"Checka in Medlemmar", "Stäng av program"};
@@ -91,7 +84,7 @@ public class Sprint2 {
                     exitProgram = false;
                     break;
                 case 0:
-                    start.databasen();
+                    //start.databasen();
                     start.program();
                     break;
             }

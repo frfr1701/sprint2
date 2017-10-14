@@ -4,20 +4,20 @@ import javax.swing.JOptionPane;
 
 public class VaritKund extends Person {
 
-    String IfKund = "Personen har varit kund!";
+    private String Message = "Personen har varit kund!";
 
     public VaritKund(String pnr, String namn) {
         super(pnr, namn);
     }
 
     @Override
-    public String getIfKund() {
-        return IfKund;
+    public int getIfKund() {
+        return 1;
     }
 
     @Override
     public void Message() throws InterruptedException {
-        JOptionPane pane = new JOptionPane(getIfKund(), JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane pane = new JOptionPane(Message, JOptionPane.INFORMATION_MESSAGE);
         showMessage(pane);
     }
 }
