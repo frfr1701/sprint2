@@ -10,5 +10,5 @@ public interface CheckKund {
 
     public void Message();
 
-    public void showMessage(JOptionPane pane);
+    public void showMessage(JOptionPane pane) throws InterruptedException;
 }
