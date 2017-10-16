@@ -20,7 +20,9 @@ public class Databas {
         String firstLine;
         String secondLine;
         try (BufferedReader br = Files.newBufferedReader(customers)) {
-            while ((firstLine = br.readLine().trim()) != null && (secondLine = br.readLine().trim()) != null) {
+            while ((firstLine = br.readLine()) != null && (secondLine = br.readLine()) != null) {
+                firstLine = firstLine.trim();
+                secondLine = secondLine.trim();
                 String[] box = firstLine.split(", ");
                 if (kravDatum.isBefore(LocalDate.parse(secondLine))) {
                     ListCustomers.add(new Kund(box[0], box[1]));
@@ -30,8 +32,6 @@ public class Databas {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Man kunde inte läsa filen!");
-        } catch (NullPointerException e) {
-            System.out.println("Filen har tagit slut!");
         }
         return ListCustomers;
     }

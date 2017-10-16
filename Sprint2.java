@@ -1,6 +1,7 @@
 package sprint2;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,7 +57,7 @@ public class Sprint2 {
                                 pw.println("///" + LocalDate.now().toString() + "///");
                             }
                             pw.println(ListCustomer.getPnr() + ", " + ListCustomer.getNamn());
-                        } catch (Exception e) {
+                        } catch (FileNotFoundException e) {
                             System.out.println("Man kan inte läsa filen!");
                         }
                     }
