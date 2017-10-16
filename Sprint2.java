@@ -17,7 +17,7 @@ public class Sprint2 {
     String loggString = "src\\sprint2\\logg.txt";
     Path logg = Paths.get("src\\sprint2\\logg.txt");
 
-    void program() throws IOException, InterruptedException {
+    void program(){
         while (true) {
             boolean noCustomer = true;
             String check = JOptionPane.showInputDialog("Skriv in ett personnummer eller namn");
@@ -59,6 +59,8 @@ public class Sprint2 {
                             pw.println(ListCustomer.getPnr() + ", " + ListCustomer.getNamn());
                         } catch (FileNotFoundException e) {
                             System.out.println("Man kan inte läsa filen!");
+                        } catch (IOException e){
+                            System.out.println("Strömmen fungerar inte!");
                         }
                     }
                 }
@@ -70,7 +72,7 @@ public class Sprint2 {
         }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException, NullPointerException {
+    public static void main(String[] args){
         Sprint2 start = new Sprint2();
         boolean exitProgram = true;
         String[] Alternativ = {"Checka in Medlemmar", "Stäng av program"};
@@ -85,7 +87,6 @@ public class Sprint2 {
                     exitProgram = false;
                     break;
                 case 0:
-                    //start.databasen();
                     start.program();
                     break;
             }

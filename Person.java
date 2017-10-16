@@ -31,11 +31,15 @@ public abstract class Person implements CheckKund {
     }
 
     @Override
-    public void showMessage(JOptionPane pane) throws InterruptedException {
-        JDialog all = pane.createDialog(null, "Gym");
-        all.setModal(false);
-        all.setVisible(true);
-        TimeUnit.SECONDS.sleep(2);
-        all.setVisible(false);
+    public void showMessage(JOptionPane pane){
+        try {
+            JDialog all = pane.createDialog(null, "Gym");
+            all.setModal(false);
+            all.setVisible(true);
+            TimeUnit.SECONDS.sleep(2);
+            all.setVisible(false);
+        } catch (InterruptedException e) {
+            System.out.println("Tidsfördröjningen fick ett problem!");
+        }
     }
 }

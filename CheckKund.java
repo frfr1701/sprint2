@@ -8,7 +8,7 @@ public interface CheckKund {
 
     public int getIfKund();
 
-    public void Message() throws InterruptedException;
+    public void Message();
 
-    public void showMessage(JOptionPane pane) throws InterruptedException;
+    public void showMessage(JOptionPane pane);
 }

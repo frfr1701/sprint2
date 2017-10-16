@@ -16,7 +16,7 @@ public class VaritKund extends Person {
     }
 
     @Override
-    public void Message() throws InterruptedException {
+    public void Message(){
         JOptionPane pane = new JOptionPane(Message, JOptionPane.INFORMATION_MESSAGE);
         showMessage(pane);
     }

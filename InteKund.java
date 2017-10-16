@@ -12,7 +12,7 @@ public class InteKund extends Person {
     }
 
     @Override
-    public void Message() throws InterruptedException {
+    public void Message(){
         JOptionPane pane = new JOptionPane(Meddelande, JOptionPane.INFORMATION_MESSAGE);
         showMessage(pane);
     }

@@ -14,7 +14,7 @@ public class Databas {
 
     private final Path customers = Paths.get("src\\sprint2\\customers.txt");
 
-    List<Person> getAllPersons() throws IOException {
+    List<Person> getAllPersons(){
         List<Person> ListCustomers = new ArrayList<>();
         LocalDate kravDatum = LocalDate.now().minusYears(1);
         String firstLine;
@@ -32,6 +32,8 @@ public class Databas {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Man kunde inte läsa filen!");
+        } catch (IOException e){
+            System.out.println("Strömmen fungerar inte!");          
         }
         return ListCustomers;
     }
