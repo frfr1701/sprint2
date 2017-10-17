@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public abstract class Person implements CheckKund {
+public abstract class Person implements IPerson {
 
     private final Path logg = Paths.get("src\\sprint2\\logg.txt");
     private String pnr;

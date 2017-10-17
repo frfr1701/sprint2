@@ -2,7 +2,7 @@ package sprint2;
 
 import javax.swing.JOptionPane;
 
-public interface CheckKund {
+public interface IPerson {
 
     public boolean compare(String CheckPerson);
 
