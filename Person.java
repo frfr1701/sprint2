@@ -12,22 +12,31 @@ import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 
 public abstract class Person implements IPerson {
 
     private final Path logg = Paths.get("src\\sprint2\\logg.txt");
+    private final String Message;
     private String pnr;
     private String namn;
 
-    public Person(String pnr, String namn) {
+    public Person(String pnr, String namn, String Message) {
         this.pnr = pnr;
         this.namn = namn;
+        this.Message = Message;
     }
 
-    public Person() {
+    public Person(String Message) {
+        this.Message = Message;
     }
 
-    void findDatumUsePrintToFile() {
+    protected String getNamn() {
+        return namn;
+    }
+
+    @Override
+    public void findDatumUsePrintToFile() {
         try (BufferedReader br = Files.newBufferedReader(logg)) {
             String compare;
             int nodatefound = 1;
@@ -54,7 +63,7 @@ public abstract class Person implements IPerson {
         }
     }
 
-    private void printToFile(int nodatefound) {
+    public void printToFile(int nodatefound) {
         try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(logg, CREATE, APPEND))) {
             if (nodatefound == 1) {
                 pw.println("///" + LocalDate.now().toString() + "///");
@@ -67,13 +76,19 @@ public abstract class Person implements IPerson {
     }
 
     @Override
-    public boolean compare(String CheckPerson) {
-        return CheckPerson.equalsIgnoreCase(pnr) || CheckPerson.equalsIgnoreCase(namn);
+    public boolean compareName(String CheckPerson) {
+        return CheckPerson.equalsIgnoreCase(namn);
     }
 
     @Override
-    public void showMessage(JOptionPane pane) {
+    public boolean comparePnr(String CheckPerson) {
+        return CheckPerson.equalsIgnoreCase(pnr);
+    }
+
+    @Override
+    public void showMessage() {
         try {
+            JOptionPane pane = new JOptionPane(Message, INFORMATION_MESSAGE);
             JDialog all = pane.createDialog(null, "Gym");
             all.setModal(false);
             all.setVisible(true);

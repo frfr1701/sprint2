@@ -1,6 +1,6 @@
 package sprint2;
 
-import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.*;
 import java.util.List;
 
 public class Sprint2 {
@@ -8,47 +8,44 @@ public class Sprint2 {
     void program() {
         while (true) {
             boolean noCustomer = true;
-            String check = JOptionPane.showInputDialog("Skriv in ett personnummer eller namn");
-            if (check == null || check.equals("")) {
+            String input = showInputDialog("Skriv in ett personnummer eller namn");
+            if (input == null || input.equals("")) {
                 break;
             }
             Databas databas = new Databas();
-            List<Person> ListCustomers = databas.getAllPersons();
-            for (Person ListCustomer : ListCustomers) {
-                if (ListCustomer.compare(check)) {
+            List<IPerson> ListCustomers = databas.getAllPersons();
+            for (IPerson ListCustomer : ListCustomers) {
+                if (ListCustomer.compareName(input) || ListCustomer.comparePnr(input)) {
                     noCustomer = false;
-                    ListCustomer.Message();
-                    if (ListCustomer.getIfKund() == 2) {
+                    ListCustomer.showMessage();
+                    if (ListCustomer instanceof Kund) {
                         ListCustomer.findDatumUsePrintToFile();
                     }
                 }
             }
             if (noCustomer) {
                 Person neverCustomer = new InteKund();
-                neverCustomer.Message();
+                neverCustomer.showMessage();
             }
         }
     }
 
     public static void main(String[] args) {
         Sprint2 start = new Sprint2();
-        boolean exitProgram = true;
         String[] Alternativ = {"Checka in Medlemmar", "Stäng av program"};
-        while (exitProgram) {
-            int svar = JOptionPane.showOptionDialog(null, "Sats Värdmö",
-                    "Gym", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, Alternativ, 0);
+        program:
+        while (true) {
+            int svar = showOptionDialog(null, "Sats Värdmö",
+                    "Gym", DEFAULT_OPTION, INFORMATION_MESSAGE, null, Alternativ, 0);
             switch (svar) {
                 case -1:
-                    exitProgram = false;
-                    break;
+                    break program;
                 case 1:
-                    exitProgram = false;
-                    break;
+                    break program;
                 case 0:
                     start.program();
                     break;
             }
         }
-        System.exit(0);
     }
 }
