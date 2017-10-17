@@ -50,7 +50,7 @@ public abstract class Person implements CheckKund {
         } catch (FileNotFoundException e) {
             System.out.println("Kan inte hitta filen!");
         } catch (IOException e) {
-            System.out.println("Problem med readern!");
+            System.out.println("Readern fungerar inte!");
         }
     }
 
@@ -62,7 +62,7 @@ public abstract class Person implements CheckKund {
             pw.println(pnr + ", " + namn);
 
         } catch (IOException e) {
-            System.out.println("Problem med writer!");
+            System.out.println("Writern fungerar inte!");
         }
     }
 

@@ -33,7 +33,7 @@ public class Databas {
         } catch (FileNotFoundException e) {
             System.out.println("Kan inte hitta filen!");
         } catch (IOException e){
-            System.out.println("Strömmen fungerar inte!");          
+            System.out.println("Readern fungerar inte!");          
         }
         return ListCustomers;
     }
