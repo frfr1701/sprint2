@@ -12,18 +12,18 @@ public class Sprint2 {
             if (input == null || input.equals("")) {
                 break;
             }
-            Databas databas = new Databas();
-            List<IPerson> ListCustomers = databas.getAllPersons();
-            for (IPerson ListCustomer : ListCustomers) {
-                if (ListCustomer.compareName(input) || ListCustomer.comparePnr(input)) {
-                    noCustomer = false;
-                    ListCustomer.showMessage();
-                    if (ListCustomer instanceof Kund) {
-                        ListCustomer.findDatumUsePrintToFile();
+            Databas databas = new Databas(); //Här gör jag ett objekt av databasen
+            List<IPerson> ListCustomers = databas.getAllPersons(); //Här hämtar jag listan av alla objekt 
+            for (IPerson ListCustomer : ListCustomers) { //Här har jag en for each loop med varje objekt
+                if (ListCustomer.compareName(input) || ListCustomer.comparePnr(input)) { //Här jämför jag min input med personnummer och namn.
+                    noCustomer = false; 
+                    ListCustomer.showMessage(); //Anropar meddelandet för personen
+                    if (ListCustomer instanceof Kund) { //Om personen bara är kund
+                        ListCustomer.findDatumUsePrintToFile(); //Printar beroende på datum och alltid personen
                     }
                 }
             }
-            if (noCustomer) {
+            if (noCustomer) { //Om det inte fanns en kund som hette så
                 Person neverCustomer = new InteKund();
                 neverCustomer.showMessage();
             }

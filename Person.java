@@ -16,40 +16,35 @@ import static javax.swing.JOptionPane.*;
 
 public abstract class Person implements IPerson {
 
-    private final Path logg = Paths.get("src\\sprint2\\logg.txt");
+    private final Path logg = Paths.get("src\\sprint2\\logg.txt"); //Här skapar jag privat Path och variabler för inkapsling av variablerna så att de inte sprids.
     private final String Message;
     private String pnr;
     private String namn;
 
-    public Person(String pnr, String namn, String Message) {
+    public Person(String pnr, String namn, String Message) { //Konstruktorn VaritKund och Kund kommer till
         this.pnr = pnr;
         this.namn = namn;
         this.Message = Message;
     }
 
-    public Person(String Message) {
+    public Person(String Message) { //Konstruktorn InteKund kommer till
         this.Message = Message;
     }
 
-    protected String getNamn() {
-        return namn;
-    }
-
-    @Override
+    @Override //Här är en av mina interface metoder
     public void findDatumUsePrintToFile() {
-        try (BufferedReader br = Files.newBufferedReader(logg)) {
+        try (BufferedReader br = Files.newBufferedReader(logg)) { //Skapar upp en reader till min logg
             String compare;
-            int nodatefound = 1;
-            while ((compare = br.readLine()) != null) {
-                LocalDate dagensDatum = LocalDate.now();
-                compare = compare.trim();
-                if (!compare.equals("")) {
-                    if (compare.charAt(0) == '/' || compare.charAt(1) == '/' || compare.charAt(2) == '/') {
-                        nodatefound = 0;
-                        compare = compare.replace("/", " ");
-                        compare = compare.trim();
-                        if (dagensDatum.isEqual(LocalDate.parse(compare))) {
-                            nodatefound = 0;
+            boolean nodatefound = true; //Skapar och säter boolean nodatefound till true för att inget datum i loggen har blivit hittat än.
+            while ((compare = br.readLine()) != null) { //Här loopar jag så länge raden som läses inte är null
+                LocalDate dagensDatum = LocalDate.now(); //skapar fram dagens datum
+                compare = compare.trim(); //trimmar compare
+                if (!compare.equalsIgnoreCase("")) { //Om raden inte är tom
+                    if (compare.charAt(0) == '/' || compare.charAt(1) == '/' || compare.charAt(2) == '/') { //Ifall raden innehåller datumloggens tre första "///" kommer den in här
+                        compare = compare.replace("/", " "); //tar bort "///" på båda sidorna dock
+                        compare = compare.trim(); //trimmar datumet
+                        if (dagensDatum.isEqual(LocalDate.parse(compare))) { // om datumet i loggen så blir nodatefound false eftersom då har samma datum hittats som dagens datum.
+                            nodatefound = false;
                         }
                     }
                 }
@@ -63,12 +58,12 @@ public abstract class Person implements IPerson {
         }
     }
 
-    public void printToFile(int nodatefound) {
-        try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(logg, CREATE, APPEND))) {
-            if (nodatefound == 1) {
+    private void printToFile(boolean nodatefound) {
+        try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(logg, CREATE, APPEND))) { //Här skapar jag en writer
+            if (nodatefound) { //Här kollar jag ifall datumet inte blev hittat, om det inte blev hittat skriver jag ut dagens datum i loggen
                 pw.println("///" + LocalDate.now().toString() + "///");
             }
-            pw.println(pnr + ", " + namn);
+            pw.println(pnr + ", " + namn); //Här skriver jag ut namnet på personen som blev incheckad
 
         } catch (IOException e) {
             System.out.println("Writern fungerar inte!");
@@ -76,18 +71,18 @@ public abstract class Person implements IPerson {
     }
 
     @Override
-    public boolean compareName(String CheckPerson) {
-        return CheckPerson.equalsIgnoreCase(namn);
+    public boolean compareName(String input) {
+        return input.equalsIgnoreCase(namn); //Här jämför jag input med namnen;
     }
 
     @Override
-    public boolean comparePnr(String CheckPerson) {
-        return CheckPerson.equalsIgnoreCase(pnr);
+    public boolean comparePnr(String input) {
+        return input.equalsIgnoreCase(pnr); //Här jämför jag input med personnumrena;
     }
 
     @Override
     public void showMessage() {
-        try {
+        try { //Här gör jag en try och visar upp ett meddelande om vad personen är för typ av kund i ett 2 sekunder långt meddelande som avslutas efteråt.
             JOptionPane pane = new JOptionPane(Message, INFORMATION_MESSAGE);
             JDialog all = pane.createDialog(null, "Gym");
             all.setModal(false);
